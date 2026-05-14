@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "MiniCarbonGPT v1.01"
+message: "If you use this repository, please cite the manuscript/preprint and this repository version."
+type: software
+authors:
+  - family-names: He
+    given-names: Lu-hao
+repository-code: "https://github.com/Geoma183/MiniCarbonGPT_v1.01"
+license: MIT
+version: "v1.01-envsoft-revision"
+date-released: "2026-05-14"
+keywords:
+  - carbon neutrality
+  - retrieval-augmented generation
+  - LoRA
+  - GLM-4-9B
+  - environmental decision support
+

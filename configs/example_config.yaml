@@ -1,0 +1,46 @@
+project:
+  name: MiniCarbonGPT_v1.01
+  version: v1.01-envsoft-revision
+  random_seed: 42
+
+paths:
+  raw_pdf_dir: data/raw/papers
+  text_output_dir: data/processed/text
+  core_corpus_dir: data/processed/core_corpus
+  supplementary_corpus_dir: data/processed/supplementary_corpus
+  core_faiss_dir: data/index/core_faiss
+  supplementary_faiss_dir: data/index/supplementary_faiss
+  objective_questions: data/objective_questions_sample.xlsx
+  subjective_questions: data/subjective_questions_sample.xlsx
+  outputs_dir: results
+
+models:
+  base_model_name_or_path: ZhipuAI/glm-4-9b-chat
+  lora_weights_path: models/lora_weights
+  embedding_model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+
+retrieval:
+  top_k: 5
+  core_weight: 1.0
+  supplementary_weight: 0.9
+  normalize_embeddings: true
+
+generation:
+  max_new_tokens: 256
+  temperature: 0.1
+  top_p: 0.9
+  repetition_penalty: 1.1
+
+evaluation:
+  objective_answer_column: answer
+  objective_prediction_column: prediction
+  subjective_reference_column: reference_answer
+  llm_judge_model: gpt-4o
+  llm_judge_temperature: 0.0
+  llm_judge_api_date: "YYYY-MM-DD"
+
+hardware:
+  gpu: "2 x NVIDIA RTX 2080Ti"
+  vram_gb_each: 22
+  python: "3.10"
+

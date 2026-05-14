@@ -1,63 +1,92 @@
-🌿 MiniCarbonGPT_v1.01
+# MiniCarbonGPT v1.01
 
-A Domain-Specific Large Language Model for Engineering-Oriented Carbon Neutrality Applications
-Using GLM-4-9B, LoRA Fine-Tuning, and Retrieval-Augmented Generation (RAG)
+Code and reproducibility materials for:
 
-📖 Citation and Preprint
+**Mini-CarbonGPT: A Resource-Efficient Knowledge-Augmented Framework for Environmental Decision Support in Carbon Neutrality Engineering**
 
-🧾 Preprint Reference:
-He, L.; Zhou, Y.; Liu, X.; Su, L. (2025).
-Mini-CarbonGPT: A Domain-Specific Language Model for Engineering-Oriented Carbon Neutrality Applications.
-SSRN Electronic Journal
-DOI: 10.2139/ssrn.5280830
+Manuscript: `ENVSOFT-D-26-01060`
 
-📘 Published as an open-access preprint on SSRN (June 11, 2025)
-📜 License: CC BY 4.0 — for academic and non-commercial use only
+> Revision note: this repository is organized to support reproducibility review for the revised submission. It documents the processing pipeline, retrieval and generation modules, evaluation protocols, and revision-related analyses requested during peer review.
 
-If you use this repository in your research, please cite as:
-@article{He2025MiniCarbonGPT,
-  title   = {Mini-CarbonGPT: A Domain-Specific Language Model for Engineering-Oriented Carbon Neutrality Applications},
-  author  = {He, Lu-hao and Zhou, Yongzhang and Liu, Xian and Su, Lu},
-  journal = {SSRN Electronic Journal},
-  year    = {2025},
-  doi     = {10.2139/ssrn.5280830},
-  url     = {https://ssrn.com/abstract=5280830}
-}
+## Repository Contents
 
-🧩 Overview
+```text
+configs/
+  example_config.yaml              # Path-free configuration template
+scripts/
+  01_pdf_to_text.py                # PDF text extraction and cleaning entry point
+  02_build_faiss_index.py          # Embedding and FAISS index construction
+  03_generate_rag_answers.py       # GLM/LoRA/RAG answer generation
+  04_evaluate_objective.py         # Objective-question accuracy evaluation
+  05_evaluate_subjective_metrics.py# F1, BERTScore, METEOR and KCR metrics
+  06_llm_judge_evaluation.py       # LLM-as-judge scoring; API key via environment variable
+  07_statistical_tests.py          # Bootstrap CI and paired significance tests
+  08_groundedness_analysis.py      # Evidence attribution and unsupported-claim analysis
+data/
+  README.md                        # Data availability and redistribution boundaries
+results/
+  README.md                        # Expected result tables and revision evidence
+docs/
+  reproducibility_protocol.md      # End-to-end workflow
+  evaluation_protocol.md           # Objective, subjective, expert, and LLM-judge evaluation
+  data_statement.md                # Public data statement for the manuscript
+  reviewer_response_note.md        # Suggested response-letter wording
+```
 
-MiniCarbonGPT_v1.01 extends our previous version (v1.00, Sustainability 2025)
-by integrating LoRA parameter-efficient fine-tuning and Retrieval-Augmented Generation (RAG) mechanisms.
-This version improves domain adaptability, factual grounding, and scalability for carbon neutrality applications, including:
-CCUS technology simulation
-Carbon emission tracking
-Low-carbon material design
-Policy analysis and carbon market evaluation
+## Reproducibility Status
 
+| Component | Status | Notes |
+|---|---|---|
+| Source code | Public | Processing, indexing, retrieval, generation, and evaluation scripts are provided. |
+| Configuration | Public template | Local absolute paths and private credentials are not included. |
+| Objective and subjective evaluation data | Partially public | Redistribution depends on the license of third-party educational/question sources. Sample files and metadata should be provided where full redistribution is restricted. |
+| CNKI/WoS paper full text | Not redistributed | Full text may be protected by database or publisher licenses. The repository provides processing scripts and corpus metadata instead. |
+| GLM-4-9B base model | External | Users should obtain it under the original model license. |
+| LoRA weights | To be specified | If redistributable, provide a release asset or external model link; otherwise provide training instructions. |
+| API-based commercial model outputs | Partially reproducible | Results depend on model version, API date, prompt, and decoding settings. |
 
-🧠 Key Enhancements in v1.01
-| Component            | Description                          | Result                       |
-| -------------------- | ------------------------------------ | ---------------------------- |
-| **LoRA Fine-tuning** | 1.5B GLM-4-9B model, INT4 quantized  | +8.9% factual gain           |
-| **RAG Integration**  | Dual-index FAISS retriever           | +6.3% semantic accuracy      |
-| **Evaluation**       | 700 objective + 249 subjective tasks | 82.1% overall score          |
-| **Deployment**       | 2× RTX 2080Ti compatible             | Reproducible and lightweight |
+## Quick Start
 
-📦 Repository Linkage
-| Resource                                                                   | Description                                            |
-| -------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [**MiniCarbonGPT_v1.00**](https://github.com/Geoma183/MiniCarbonGPT_v1.00) | Initial version (Sustainability 2025)                  |
-| [**MiniCarbonGPT_v1.01**](https://github.com/Geoma183/MiniCarbonGPT_v1.01) | SSRN preprint version (LoRA + RAG)                     |
-| [**Upcoming v2.00**](#)                                                    | Multimodal + multilingual integration (in preparation) |
+1. Create a Python environment.
 
+```bash
+pip install -r requirements.txt
+```
 
-💬 Abstract (from SSRN)
-Large language models (LLMs) provide substantial potential for engineering-oriented carbon neutrality tasks.
-However, general-purpose models lack domain expertise.
-To bridge this gap, we propose Mini-CarbonGPT, a domain-specific LLM integrating LoRA fine-tuning and RAG-based retrieval.
-Evaluations on 949 QA tasks (700 objective, 249 subjective) across CCUS, policy, and emission domains show that MiniCarbonGPT outperforms GPT-4o and Gemini-1.5 in both accuracy and factual reliability.
+2. Copy the configuration template and edit local paths.
 
-📚 Citation Note (for Paper Submissions)
-“The code and framework for Mini-CarbonGPT (v1.01) are publicly available at
-https://github.com/Geoma183/MiniCarbonGPT_v1.01,
-corresponding to the SSRN preprint DOI 10.2139/ssrn.5280830.”
+```bash
+cp configs/example_config.yaml configs/local_config.yaml
+```
+
+3. Run the workflow steps.
+
+```bash
+python scripts/01_pdf_to_text.py --config configs/local_config.yaml
+python scripts/02_build_faiss_index.py --config configs/local_config.yaml
+python scripts/03_generate_rag_answers.py --config configs/local_config.yaml --mode fine_rag
+python scripts/04_evaluate_objective.py --config configs/local_config.yaml
+python scripts/05_evaluate_subjective_metrics.py --config configs/local_config.yaml
+```
+
+4. Run revision-related checks.
+
+```bash
+python scripts/07_statistical_tests.py --predictions results/objective_predictions.csv --out results/statistical_significance.csv
+python scripts/08_groundedness_analysis.py --claims results/generated_claims.csv --out results/groundedness_analysis.csv
+```
+
+## Security and Privacy
+
+No API keys, passwords, personal machine paths, or private credentials should be committed to this repository. API-based evaluation scripts read credentials from environment variables such as `OPENAI_API_KEY`.
+
+If a credential was accidentally committed in an earlier local script, revoke or rotate it before publication.
+
+## Data Availability Statement
+
+The source code, evaluation scripts, configuration templates, and reproducibility materials are publicly available in this repository. Due to licensing restrictions, third-party full-text documents and some benchmark items derived from external educational platforms are not redistributed in full; instead, this repository provides metadata, sample files, processing scripts, and evaluation protocols needed to reproduce the workflow with legally obtained data.
+
+## Citation
+
+If you use this repository, please cite the manuscript/preprint and this repository version. A `CITATION.cff` file is provided for citation metadata.
+
