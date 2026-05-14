@@ -1,0 +1,8 @@
+stage,input_count,removed_count,retained_count,removal_reason,evidence_artifact,notes
+objective_final_public_benchmark,700,0,700,final_public_file,data/objective_questions.xlsx,"The repository currently documents the final objective benchmark rather than the full raw collection history."
+subjective_final_public_benchmark,249,0,249,final_public_file,data/subjective_questions.xlsx,"The repository currently documents the final subjective benchmark rather than the full raw collection history."
+carbon_topic_screening,to_be_documented_from_original_screening_records,to_be_documented_from_original_screening_records,949,non_carbon_or_low_relevance_items_removed,data/benchmark_composition.csv,"The manuscript revision should report original collection counts if the records are available."
+ambiguity_and_duplicate_review,to_be_documented_from_original_screening_records,to_be_documented_from_original_screening_records,949,duplicate_ambiguous_or_unanswerable_items_removed,data/benchmark_composition.csv,"Retained counts are public; raw-stage removal counts should be added if available."
+answer_consistency_check,to_be_documented_from_original_screening_records,to_be_documented_from_original_screening_records,949,incorrect_or_inconsistent_reference_answers_removed_or_corrected,data/objective_questions.xlsx;data/subjective_questions.xlsx,"Reference answers and scoring outputs are publicly available in the benchmark files."
+expert_review,to_be_documented_from_original_screening_records,to_be_documented_from_original_screening_records,949,domain_review_and_refinement,docs/evaluation_protocol.md,"The revised manuscript should state evaluator number, expertise, blind-review setting, and agreement statistics when available."
+

@@ -1,0 +1,3 @@
+question_id,subset,max_similarity_to_training,max_similarity_to_retrieval_corpus,similarity_method,leakage_risk,action,notes
+example-001,objective,,,,,not_evaluated,"Fill this template after n-gram, Jaccard, or embedding-based leakage screening."
+example-002,subjective,,,,,not_evaluated,"Use this file to document whether evaluation questions overlap with instruction-tuning or retrieval corpora."
