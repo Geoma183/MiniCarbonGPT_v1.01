@@ -8,6 +8,7 @@ The repository currently includes two benchmark files used in the manuscript:
 
 - `objective_questions.xlsx`: 700 multiple-choice questions with domain labels, options, reference answers, model outputs, and correctness labels.
 - `subjective_questions.xlsx`: 249 open-ended questions with reference answers, model responses, automatic metrics, keyword coverage rates, and judge scores.
+- `subjective_questions_with_domain_metadata.xlsx`: the domain-labeled version of the subjective benchmark. This file supports reproduction of the subdomain-level subjective evaluation results reported in Tables 5 and 6 of the revised manuscript.
 
 These files improve transparency by exposing the evaluation questions, reference answers, model responses, and scoring outputs used in the manuscript. However, because some items were screened or adapted from third-party educational sources, users should treat them as academic reproducibility materials and verify source-specific redistribution rights before reuse beyond peer review or research validation.
 
